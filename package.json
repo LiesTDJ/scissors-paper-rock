@@ -1,12 +1,16 @@
 {
   "name": "projetbackend",
   "version": "1.0.0",
-  "description": "***\r This is my first game with a Back-end for a **IFOCOP** project.\r ***\r ## 1.1. Table of Contents\r - [1. Scissors Paper Rock :](#1-scissors-paper-rock-)\r   - [1.1. Table of Contents](#11-table-of-contents)\r   - [1.2. General Info](#12-general-info)\r     - [1.2.1. Project status](#121-project-status)",
+  "description": "This is my first game with a Back-end for a IFOCOP project.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Lies_Tdj",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
