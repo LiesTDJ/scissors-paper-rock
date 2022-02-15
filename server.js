@@ -9,6 +9,10 @@ const port = 8080;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+
+app.use('/carottes', express.static(path.join(__dirname, 'public/css')));
+
 app.get('/', (req, res) => {
     res.sendFile(
         'index.html',
