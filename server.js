@@ -4,14 +4,38 @@ import express from 'express';
 import path, {dirname} from'path';
 import {fileURLToPath} from 'url';
 
+import expressSession from 'express-session';
+import sessionFileStore from 'session-file-store';
+import { v4 as uuidv4 } from 'uuid';
+import bodyParser from 'body-parser';
+
 const app = express();
 const port = 8080;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(bodyParser.json());
+
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
-app.use('/carottes', express.static(path.join(__dirname, 'public/css')));
+app.use('/css', express.static(path.join(__dirname, 'public/css')));
+
+const ExpressSessionFileStore = sessionFileStore(expressSession);
+const fileStore = new ExpressSessionFileStore({
+    path: './sessions',
+    ttl: 3600,
+    retries: 10,
+    secret: 'Mon super secret!'
+});
+
+app.use(expressSession({
+    store: fileStore,
+    secret: 'mon secret de session',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.get('/', (req, res) => {
     res.sendFile(
@@ -26,6 +50,30 @@ app.get('/', (req, res) => {
         }
     );
 })
+
+app.route('/loginSession')
+    .post((req, res) => {
+        console.log('req.body: ', req.body);
+
+        req.session[req.body?.name] = {
+            id: uuidv4(),
+            name: req.body?.name,
+            email: req.body?.email
+        };
+
+        res.sendFile(
+            'confirmationSession.html',
+            {
+                root: path.join(__dirname, 'public/html')
+            },
+            (err) => {
+                if (err) {
+                    console.log('Erreur from the get "/" : ', err);
+                }
+            }
+        );
+    })
+
 
 app.get('*', (req, res) => {
     res.sendFile(
