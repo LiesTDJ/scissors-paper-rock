@@ -9,6 +9,8 @@ import sessionFileStore from 'session-file-store';
 import { v4 as uuidv4 } from 'uuid';
 import bodyParser from 'body-parser';
 
+import pug from 'pug';
+
 const app = express();
 const port = 8080;
 const __filename = fileURLToPath(import.meta.url);
@@ -21,6 +23,8 @@ app.use(bodyParser.json());
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
+
+app.set('view engine', 'pug');
 
 const ExpressSessionFileStore = sessionFileStore(expressSession);
 const fileStore = new ExpressSessionFileStore({
@@ -55,25 +59,22 @@ app.route('/loginSession')
     .post((req, res) => {
         console.log('req.body: ', req.body);
 
+        // const compiledFunction = pug.compileFile('public/pages/confirmationSession.pug');
+
         req.session[req.body?.name] = {
             id: uuidv4(),
             name: req.body?.name,
             email: req.body?.email
         };
 
-        res.sendFile(
-            'confirmationSession.html',
+        res.render(
+            'confirmationSession',
             {
-                root: path.join(__dirname, 'public/html')
-            },
-            (err) => {
-                if (err) {
-                    console.log('Erreur from the get "/" : ', err);
-                }
+                name: req.body?.name,
+                email: req.body?.email,
             }
         );
     })
-
 
 app.get('*', (req, res) => {
     res.sendFile(
