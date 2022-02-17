@@ -24,6 +24,8 @@ app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
 
+app.use('/img', express.static(path.join(__dirname, 'public/img')));
+
 app.set('view engine', 'pug');
 
 const ExpressSessionFileStore = sessionFileStore(expressSession);
@@ -57,12 +59,24 @@ app.get('/', (req, res) => {
 
 app.route('/loginSession')
     .post((req, res) => {
-        console.log('req.body: ', req.body);
-
-        // const compiledFunction = pug.compileFile('public/pages/confirmationSession.pug');
-
         req.session[req.body?.name] = {
             id: uuidv4(),
+            name: req.body?.name,
+            email: req.body?.email
+        };
+
+        res.render(
+            'confirmationSession',
+            {
+                name: req.body?.name,
+                email: req.body?.email,
+            }
+        );
+    })
+
+app.route('/gameField')
+    .post((req, res) => {
+        req.session[req.body?.name] = {
             name: req.body?.name,
             email: req.body?.email
         };

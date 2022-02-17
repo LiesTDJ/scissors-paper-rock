@@ -18,5 +18,32 @@ header
 main
   div
     p  Bienvenue #{name}, vous êtes connecté(e) !
-    p  Commencer à jouer.
+    p  Choisissez votre personnage :
+form.formChoiceAvatar(action='/gameField' method='post')
+  .rendered-form
+    .formbuilder-radio-group.form-group.field-choiceAvatar
+      label.formbuilder-radio-group-label(for='choiceAvatar')
+        | Quel sera votre personnage
+        span.formbuilder-required 
+        span.tooltip-element(tooltip="Choisi l'avatar qui représentera votre personnage") ?
+      .radio-group
+        .formbuilder-radio
+          input#choiceAvatar-0.avatarChoice(name='choiceAvatar' access='false' required='required' aria-required='true' value='Rouge' type='radio')
+          label(for='choiceAvatar-0')
+            | Personnage 1
+            img.perso1(src='/img/Perso1Mini.png' alt='Red among Us Character')
+        .formbuilder-radio
+          input#choiceAvatar-1.avatarChoice(name='choiceAvatar' access='false' required='required' aria-required='true' value='Bleu' type='radio')
+          label(for='choiceAvatar-1')
+            | Personnage 2
+            img.perso2(src='/img/Perso2Mini.png' alt='Blue among Us Character')
+        .formbuilder-radio
+          input#choiceAvatar-2.avatarChoice(name='choiceAvatar' access='false' required='required' aria-required='true' value='Vert' type='radio')
+          label(for='choiceAvatar-2')
+            | Personnage 3
+            img.perso3(src='/img/Perso3Mini.png' alt='Green among Us Character')
+    br
+    .formbuilder-button.form-group.field-button-1645109276070
+      button#button-1645109276070.btn-default.btn(type='button' name='button-1645109276070' access='false' style='default') Jouer !
+
 script(src='/js/index.js')
