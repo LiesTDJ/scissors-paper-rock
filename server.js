@@ -82,7 +82,7 @@ app.route('/gameField')
         };
 
         res.render(
-            'confirmationSession',
+            'gameField',
             {
                 name: req.body?.name,
                 email: req.body?.email,
