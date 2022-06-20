@@ -15,7 +15,11 @@ This is my *first game with Back-end* made for a learning project at the **Ifoco
 ***
 I would like to make a **Scissors Paper Rock game** using NodeJS.
 ***
+After you have copied this project from github, you have to use the command **npm i** to install the node_modules.
+***
+Then use the command **npm start** to run the server and now you can go to *http://localhost:8080/*
+***
 ### 1.2.1. Project status
 ***
-Not started yet.
+Not finished yet.
 ***
