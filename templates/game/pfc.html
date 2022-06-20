@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Pierre Feuille Ciseau</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbarPers" href="/">Pierre Feuille Ciseau</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 offset-md-3">
+
+                <div class="alert d-none" role="alert" id="turn-message"></div>
+
+                <div class="card mb-3" id ="user-card">
+                    <div class="card-body">
+
+                        <form method="POST" id="form">
+
+                            <div class="mb-3">        
+                                <label for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" class="form control" id="username" minlength="2" maxlength="20" placeholder="Quel est ton nom" required>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="start" type="submit">Création d'un salon privée</button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="card mb-3 d-none" id="rooms-card">
+                    <div class="card-header">Salons disponibles</div>
+                    <ul class="list-group list-group-flush" id="rooms-list"></ul>
+                </div>
+
+                <div class="d-none" id="waiting-area">
+
+                    <div class="card mb-3">
+                        <div class="card-header">Second joueur pas encore connecté</div>
+                        <div class="card-body mx-auto">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body text-center">
+                            Demander à un ami de vous rejoindre pour jouer.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card d-none" id="game-card">
+                    <div class="card-header">
+                        Pierre Feuille Ciseau
+                    </div>
+                    <div class="card-body mx-auto">
+                        <table class="board">
+                            <tr>
+                                <td class="cell" id="pierre">Pierre</td>
+                            </tr>
+
+                            <tr>
+                                <td class="cell" id="feuille">Feuille</td>
+                            </tr>
+
+                            <tr>
+                                <td class="cell" id="ciseaux">Ciseaux</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="text-center d-none mt-2" id="restart-area">
+                    <input type="button" class="btn btn-primary" id="restart" value="Relancer une partie">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
